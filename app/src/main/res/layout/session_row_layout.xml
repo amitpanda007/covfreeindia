@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/dateTextViewOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="2 May"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/slotStatusChipOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Booked"
+        android:textSize="12sp"
+        app:chipCornerRadius="8dp"
+        app:chipMinHeight="16dp"
+        app:chipMinTouchTargetSize="12dp"
+        app:chipStrokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="@+id/dateTextViewOne"
+        app:layout_constraintStart_toStartOf="@+id/dateTextViewOne"
+        app:layout_constraintTop_toBottomOf="@+id/dateTextViewOne" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/slotStatusChipOne"
+        app:layout_constraintStart_toStartOf="@+id/slotStatusChipOne"
+        app:layout_constraintTop_toBottomOf="@+id/slotStatusChipOne"
+        app:srcCompat="@drawable/ic_group_24" />
+
+    <TextView
+        android:id="@+id/minAgeTextOne"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:text="18+"
+        android:textColor="@color/red_700"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

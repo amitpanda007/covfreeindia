@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CovFreeIndia</string>
+    <string name="list_fragment">Centers</string>
+    <string name="map_fragment">Map</string>
 </resources>
