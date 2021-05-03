@@ -7,9 +7,14 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.covfreeindia.ui.fragments.list.ListFragment"
+        android:name="com.example.covfreeindia.ui.fragments.list.CenterListFragment"
         android:label="Centers"
         tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/districtListFragment"
+        android:name="com.example.covfreeindia.ui.fragments.list.DistrictListFragment"
+        android:label="District"
+        tools:layout="@layout/fragment_district_list" />
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.covfreeindia.ui.fragments.maps.MapsFragment"

@@ -9,12 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.covfreeindia.R
 import com.example.covfreeindia.models.centers.Center
 import com.example.covfreeindia.models.centers.CenterByPincode
-import com.example.covfreeindia.models.centers.Session
 
 
-class CenterListAdapter: RecyclerView.Adapter<CenterListAdapter.MyViewHolder>() {
+class DistrictListAdapter: RecyclerView.Adapter<DistrictListAdapter.MyViewHolder>() {
 
-    private var centers = mutableListOf<Center>()
+    private var centers = emptyList<Center>()
 //    private val sessionAdapter by lazy { SessionListAdapter() }
 //    private var viewPool = RecyclerView.RecycledViewPool()
 
@@ -45,7 +44,7 @@ class CenterListAdapter: RecyclerView.Adapter<CenterListAdapter.MyViewHolder>() 
 
         holder.sessionRecyclerView.apply {
             layoutManager = LinearLayoutManager(holder.sessionRecyclerView.context, RecyclerView.HORIZONTAL, false)
-            adapter = SessionListAdapter(currentCenter.sessions)
+            adapter = DistrictSessionListAdapter(currentCenter.sessions)
 //            recycledViewPool = viewPool
         }
 
@@ -59,16 +58,7 @@ class CenterListAdapter: RecyclerView.Adapter<CenterListAdapter.MyViewHolder>() 
     }
 
     fun setData(newData: CenterByPincode) {
-        centers.addAll(newData.centers)
-        notifyDataSetChanged()
-    }
-
-    fun setSessionData(centerId: Int, sessions: List<Session>) {
-        centers.forEach {
-            if(it.centerId == centerId) {
-                it.sessions.addAll(sessions)
-            }
-        }
+        centers = newData.centers
         notifyDataSetChanged()
     }
 

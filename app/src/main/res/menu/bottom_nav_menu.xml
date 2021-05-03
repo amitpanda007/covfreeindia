@@ -5,6 +5,10 @@
         android:title="@string/list_fragment"
         android:icon="@drawable/ic_hospital_24" />
 
+    <item android:id="@+id/districtListFragment"
+        android:title="District"
+        android:icon="@drawable/ic_location_city_24" />
+
     <item android:id="@+id/mapsFragment"
         android:title="@string/map_fragment"
         android:icon="@drawable/ic_map_24" />

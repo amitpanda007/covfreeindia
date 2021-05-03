@@ -9,5 +9,6 @@ class Constants {
 
         const val QUERY_PINCODE = "pincode"
         const val QUERY_DATE = "date"
+        const val QUERY_DISTRICT_ID = "district_id"
     }
 }

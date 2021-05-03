@@ -11,7 +11,7 @@ import com.example.covfreeindia.R
 import com.example.covfreeindia.models.centers.Session
 import com.google.android.material.chip.Chip
 
-class SessionListAdapter(private val sessions : List<Session>): RecyclerView.Adapter<SessionListAdapter.MyViewHolder>() {
+class DistrictSessionListAdapter(private val sessions : List<Session>): RecyclerView.Adapter<DistrictSessionListAdapter.MyViewHolder>() {
 
 //    private var sessions = emptyList<Session>()
 

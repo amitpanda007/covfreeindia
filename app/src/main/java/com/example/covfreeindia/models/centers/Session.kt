@@ -1,4 +1,4 @@
-package com.example.covfreeindia.models
+package com.example.covfreeindia.models.centers
 
 
 import com.google.gson.annotations.SerializedName

@@ -1,4 +1,4 @@
-package com.example.covfreeindia.models
+package com.example.covfreeindia.models.centers
 
 
 import com.google.gson.annotations.SerializedName
@@ -23,7 +23,7 @@ data class Center(
     @SerializedName("pincode")
     val pincode: Int,
     @SerializedName("sessions")
-    val sessions: List<Session>,
+    val sessions: MutableList<Session>,
     @SerializedName("state_name")
     val stateName: String,
     @SerializedName("to")

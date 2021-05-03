@@ -80,5 +80,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
 
+    // Easy Permission KTX
+    implementation 'com.vmadalin:easypermissions-ktx:0.1.0'
+
+    // Location
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
 
 }
