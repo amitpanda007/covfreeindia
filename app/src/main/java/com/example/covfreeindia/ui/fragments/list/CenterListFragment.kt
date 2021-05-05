@@ -23,6 +23,9 @@ import com.google.android.gms.location.LocationServices
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -83,70 +86,30 @@ class CenterListFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             Log.d(LOG_TAG, currentLocation.first().locality)
             Log.d(LOG_TAG, currentLocation.first().postalCode)
 
-            val sdf = SimpleDateFormat("dd-MM-yyyy")
+            // QUERY DATA FOR API
+
+            /*val sdf = SimpleDateFormat("dd-MM-yyyy")
             val sevenDaysTime = 1000 * 60 * 60 * 24 * 7
             val today = Date()
-            val sevenDays = Date(today.time + sevenDaysTime)
-            val fourteenDays = Date(sevenDays.time + sevenDaysTime)
-            val twentyOneDays = Date(fourteenDays.time + sevenDaysTime)
-            val twentyEightDays = Date(twentyOneDays.time + sevenDaysTime)
-
-            val currentDate = sdf.format(today)
-            val sevenDaysDate = sdf.format(sevenDays)
-            val fourteenDaysDate = sdf.format(fourteenDays)
-            val twentyOneDaysDate = sdf.format(twentyOneDays)
-            val twentyEightDaysDate = sdf.format(twentyEightDays)
-
+            val currentDate = sdf.format(today)*/
             val postalCode = currentLocation.first().postalCode
+            val days = "28"
+            val minAge = "18"
+            val maxAge = "45"
+            val avlQty = "1"
 
-//            requestApiData(currentLocation.first().postalCode, currentDate)
-//            requestApiData(postalCode, currentDate)
-            requestApiData("751018", currentDate)
-            requestMoreApiData("751018", sevenDaysDate)
-            requestMoreApiData("751018", fourteenDaysDate)
-            requestMoreApiData("751018", twentyOneDaysDate)
-            requestMoreApiData("751018", twentyEightDaysDate)
+            requestApiData(postalCode, days, minAge, maxAge, avlQty)
         }
     }
 
-    private fun requestApiData(pinCode: String, date: String) {
-        mainViewModel.getCenters(centerViewModel.applyQueries(pinCode, date))
+    private fun requestApiData(pinCode: String, days: String, minAge: String, maxAge: String, avlQty: String) {
+        mainViewModel.getCenters(centerViewModel.applyQueries(pinCode, days, minAge, maxAge, avlQty))
         mainViewModel.centerResponse.observe(viewLifecycleOwner, { response ->
-            Log.i(LOG_TAG, response.toString())
+            // Log.i(LOG_TAG, response.toString())
             when(response) {
                 is NetworkResult.Success -> {
                     response.data?.let {
                         centerAdapter.setData(it)
-                    }
-                }
-                is NetworkResult.Error -> {
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                is NetworkResult.Loading -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "Gathering Data...",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        })
-    }
-
-    private fun requestMoreApiData(pinCode: String, date: String) {
-        mainViewModel.getCenters(centerViewModel.applyQueries(pinCode, date))
-        mainViewModel.centerResponse.observe(viewLifecycleOwner, { response ->
-            Log.i(LOG_TAG, response.toString())
-            when(response) {
-                is NetworkResult.Success -> {
-                    response.data?.let {
-                        it.centers.forEach {
-                            centerAdapter.setSessionData(it.centerId, it.sessions)
-                        }
                     }
                 }
                 is NetworkResult.Error -> {

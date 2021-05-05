@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -12,6 +13,7 @@ import com.example.covfreeindia.models.centers.CenterByPincode
 import com.example.covfreeindia.models.districts.District
 import com.example.covfreeindia.models.districts.Districts
 import com.example.covfreeindia.models.states.States
+import com.example.covfreeindia.util.Constants.Companion.LOG_TAG
 import com.example.covfreeindia.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,11 +28,13 @@ class MainViewModel @Inject constructor(
 ): AndroidViewModel(application) {
 
     var centerResponse: MutableLiveData<NetworkResult<CenterByPincode>> = MutableLiveData()
+    var futureCenterResponse: MutableLiveData<NetworkResult<CenterByPincode>> = MutableLiveData()
     var districtCenterResponse: MutableLiveData<NetworkResult<CenterByPincode>> = MutableLiveData()
     var statesResponse: MutableLiveData<NetworkResult<States>> = MutableLiveData()
     var districtsResponse: MutableLiveData<NetworkResult<Districts>> = MutableLiveData()
 
-    var hasDistrictData: Boolean = false
+    private var hasDistrictData: Boolean = false
+    private var hasCenterData: Boolean = false
 
     fun getStates() = viewModelScope.launch {
         if(hasInternetConnection()) {
@@ -71,10 +75,17 @@ class MainViewModel @Inject constructor(
     }
 
     private suspend fun getCentersSafeCall(queries: Map<String, String>) {
+        Log.i(LOG_TAG, "getCentersSafeCall Called");
+        if(hasCenterData) {
+            centerResponse.value = null
+        }
         if(hasInternetConnection()) {
             try {
+                Log.i(LOG_TAG, "Calling API ${queries.entries}");
                 val response = repository.remote.getCentersByPinCode(queries)
+                Log.i(LOG_TAG, "Response: ${response.body()}");
                 centerResponse.value = handleCenterResponse(response)
+                hasCenterData = true
             } catch (e: Exception) {
 
             }

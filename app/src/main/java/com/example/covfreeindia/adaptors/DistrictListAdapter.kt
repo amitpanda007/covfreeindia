@@ -14,8 +14,6 @@ import com.example.covfreeindia.models.centers.CenterByPincode
 class DistrictListAdapter: RecyclerView.Adapter<DistrictListAdapter.MyViewHolder>() {
 
     private var centers = emptyList<Center>()
-//    private val sessionAdapter by lazy { SessionListAdapter() }
-//    private var viewPool = RecyclerView.RecycledViewPool()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val centerName: TextView = itemView.findViewById(R.id.centerNameTextView)
@@ -36,16 +34,9 @@ class DistrictListAdapter: RecyclerView.Adapter<DistrictListAdapter.MyViewHolder
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentCenter = centers[position]
-//        setSessionRecycler(holder.sessionRecycler, currentCenter.sessions)
-
-//        holder.sessionRecycler.adapter = sessionAdapter
-//        holder.sessionRecycler.layoutManager = LinearLayoutManager(holder.sessionRecycler.context, RecyclerView.HORIZONTAL, false)
-//        sessionAdapter.setData(currentCenter.sessions)
-
         holder.sessionRecyclerView.apply {
             layoutManager = LinearLayoutManager(holder.sessionRecyclerView.context, RecyclerView.HORIZONTAL, false)
             adapter = DistrictSessionListAdapter(currentCenter.sessions)
-//            recycledViewPool = viewPool
         }
 
         holder.centerName.text = currentCenter.name

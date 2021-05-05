@@ -108,12 +108,17 @@ class DistrictListFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         autoCompleteDistrictView.setOnItemClickListener {_, _, position, _ ->
             val value = arrayDistrictAdaptor.getItem(position) ?: ""
+
+            // API Query Params
             val districtId = districtOptionMap[value].toString()
+            /*val sdf = SimpleDateFormat("dd-MM-yyyy")
+            val currentDate = sdf.format(Date())*/
+            val days = "28"
+            val minAge = "18"
+            val maxAge = "45"
+            val avlQty = "1"
 
-            val sdf = SimpleDateFormat("dd-MM-yyyy")
-            val currentDate = sdf.format(Date())
-
-            requestApiData(districtId, currentDate)
+            requestApiData(districtId, days, minAge, maxAge, avlQty)
         }
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
@@ -167,8 +172,8 @@ class DistrictListFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
     }
 
-    private fun requestApiData(distId: String, date: String) {
-        mainViewModel.getDistrictCenters(centerViewModel.applyDistrictQueries(distId, date))
+    private fun requestApiData(distId: String, days: String, minAge: String, maxAge: String, avlQty: String) {
+        mainViewModel.getDistrictCenters(centerViewModel.applyDistrictQueries(distId, days, minAge, maxAge, avlQty))
         mainViewModel.districtCenterResponse.observe(viewLifecycleOwner, { response ->
             Log.i(Constants.LOG_TAG, response.toString())
             when(response) {

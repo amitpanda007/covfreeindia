@@ -22,6 +22,16 @@ interface CenterDetailsApi {
         @QueryMap queries: Map<String, String>
     ): Response<CenterByPincode>
 
+    @GET("center/avlByPin")
+    suspend fun getCentersByPinNodeApi(
+        @QueryMap queries: Map<String, String>
+    ): Response<CenterByPincode>
+
+    @GET("center/avlByDist")
+    suspend fun getDistrictCentersNodeApi(
+        @QueryMap queries: Map<String, String>
+    ): Response<CenterByPincode>
+
     @GET("admin/location/states")
     suspend fun getStates(): Response<States>
 

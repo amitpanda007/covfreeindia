@@ -12,11 +12,13 @@ class RemoteDataSource @Inject constructor(
 ){
 
     suspend fun getCentersByPinCode(queries: Map<String, String>): Response<CenterByPincode> {
-        return centerDetailsApi.getCentersByPin(queries)
+//        return centerDetailsApi.getCentersByPin(queries)
+        return centerDetailsApi.getCentersByPinNodeApi(queries)
     }
 
     suspend fun getDistrictCentersByDistrictId(queries: Map<String, String>): Response<CenterByPincode> {
-        return centerDetailsApi.getDistrictCenters(queries)
+//        return centerDetailsApi.getDistrictCenters(queries)
+        return centerDetailsApi.getDistrictCentersNodeApi(queries)
     }
 
     suspend fun getStates(): Response<States> {

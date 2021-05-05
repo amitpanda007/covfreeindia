@@ -1,5 +1,6 @@
 package com.example.covfreeindia.adaptors
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.covfreeindia.R
 import com.example.covfreeindia.models.centers.Center
 import com.example.covfreeindia.models.centers.CenterByPincode
-import com.example.covfreeindia.models.centers.Session
+import com.example.covfreeindia.util.Constants.Companion.LOG_TAG
 
 
 class CenterListAdapter: RecyclerView.Adapter<CenterListAdapter.MyViewHolder>() {
@@ -37,16 +38,9 @@ class CenterListAdapter: RecyclerView.Adapter<CenterListAdapter.MyViewHolder>() 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentCenter = centers[position]
-//        setSessionRecycler(holder.sessionRecycler, currentCenter.sessions)
-
-//        holder.sessionRecycler.adapter = sessionAdapter
-//        holder.sessionRecycler.layoutManager = LinearLayoutManager(holder.sessionRecycler.context, RecyclerView.HORIZONTAL, false)
-//        sessionAdapter.setData(currentCenter.sessions)
-
         holder.sessionRecyclerView.apply {
             layoutManager = LinearLayoutManager(holder.sessionRecyclerView.context, RecyclerView.HORIZONTAL, false)
             adapter = SessionListAdapter(currentCenter.sessions)
-//            recycledViewPool = viewPool
         }
 
         holder.centerName.text = currentCenter.name
@@ -59,16 +53,8 @@ class CenterListAdapter: RecyclerView.Adapter<CenterListAdapter.MyViewHolder>() 
     }
 
     fun setData(newData: CenterByPincode) {
+        Log.i(LOG_TAG, newData.toString())
         centers.addAll(newData.centers)
-        notifyDataSetChanged()
-    }
-
-    fun setSessionData(centerId: Int, sessions: List<Session>) {
-        centers.forEach {
-            if(it.centerId == centerId) {
-                it.sessions.addAll(sessions)
-            }
-        }
         notifyDataSetChanged()
     }
 
