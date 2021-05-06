@@ -12,6 +12,7 @@ import retrofit2.http.QueryMap
 
 interface CenterDetailsApi {
 
+    // COWIN API DIRECT CALL
     @GET("appointment/sessions/public/calendarByPin")
     suspend fun getCentersByPin(
         @QueryMap queries: Map<String, String>
@@ -22,6 +23,13 @@ interface CenterDetailsApi {
         @QueryMap queries: Map<String, String>
     ): Response<CenterByPincode>
 
+    @GET("admin/location/states")
+    suspend fun getStates(): Response<States>
+
+    @GET("admin/location/districts/{stateId}")
+    suspend fun getStateDistrict(@Path("stateId") stateId: String): Response<Districts>
+
+    // PERSONAL API CALLS
     @GET("center/avlByPin")
     suspend fun getCentersByPinNodeApi(
         @QueryMap queries: Map<String, String>
@@ -32,9 +40,10 @@ interface CenterDetailsApi {
         @QueryMap queries: Map<String, String>
     ): Response<CenterByPincode>
 
-    @GET("admin/location/states")
-    suspend fun getStates(): Response<States>
+    @GET("location/states")
+    suspend fun getStatesNodeApi(): Response<States>
 
-    @GET("admin/location/districts/{distId}")
-    suspend fun getStateDistrict(@Path("distId") distId: String): Response<Districts>
+    @GET("location/districts/{stateId}")
+    suspend fun getStateDistrictNodeApi(@Path("stateId") stateId: String): Response<Districts>
+
 }

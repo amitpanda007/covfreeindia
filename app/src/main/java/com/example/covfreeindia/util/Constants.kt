@@ -6,7 +6,7 @@ class Constants {
         const val LOG_TAG = "COVID_FREE_INDIA"
         const val API_KEY = ""
 //        const val BASE_URL = "https://cdn-api.co-vin.in/api/v2/"
-        const val BASE_URL = "http://139.59.21.167:3000"
+        const val BASE_URL = "http://13.126.117.88/"
 
         const val QUERY_PINCODE = "pincode"
         const val QUERY_DATE = "date"

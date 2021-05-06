@@ -22,10 +22,12 @@ class RemoteDataSource @Inject constructor(
     }
 
     suspend fun getStates(): Response<States> {
-        return centerDetailsApi.getStates()
+//        return centerDetailsApi.getStates()
+        return centerDetailsApi.getStatesNodeApi()
     }
 
-    suspend fun getDistricts(distId: String): Response<Districts> {
-        return centerDetailsApi.getStateDistrict(distId)
+    suspend fun getDistricts(stateId: String): Response<Districts> {
+//        return centerDetailsApi.getStateDistrict(distId)
+        return centerDetailsApi.getStateDistrictNodeApi(stateId)
     }
 }
